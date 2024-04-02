@@ -7,10 +7,10 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
-reps = 1
+WORK_MIN = 0.5
+SHORT_BREAK_MIN = 0.3
+LONG_BREAK_MIN = 0.8
+reps = 0
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
@@ -22,16 +22,20 @@ def start_timer():
         reps = 1
     else:
         reps += 1
+    print(reps)
 
     work_sec = WORK_MIN * 60
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
 
     if reps % 2 == 0:
+        label_timer.config(text="Short Break", fg=PINK)
         count_down(short_break_sec)
     elif reps % 8 == 0:
+        label_timer.config(text="Long Break", fg=RED)
         count_down(long_break_sec)
     else:
+        label_timer.config(text="Work", fg=GREEN)
         count_down(work_sec)
 
 
@@ -66,7 +70,7 @@ label_timer.grid(row=1, column=2)
 canvas = Canvas(width=210, height=230, bg=YELLOW, highlightthickness=0)
 tomato = PhotoImage(file="tomato.png")
 canvas.create_image(103, 100, image=tomato)
-timer_text = canvas.create_text(103, 125, text="10", font=(FONT_NAME, 30, "bold"), fill="white")
+timer_text = canvas.create_text(103, 125, text="00.00", font=(FONT_NAME, 30, "bold"), fill="white")
 canvas.grid(row=2, column=2)
 
 button_start = Button(text="Start", bg="white", font=(FONT_NAME, 13, "bold"), highlightthickness=0,
