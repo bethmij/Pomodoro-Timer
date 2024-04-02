@@ -11,9 +11,17 @@ WORK_MIN = 0.2
 SHORT_BREAK_MIN = 0.1
 LONG_BREAK_MIN = 0.3
 reps = 0
+timer = None
 
 
 # ---------------------------- TIMER RESET ------------------------------- #
+def restart_timer():
+    global timer
+    window.after_cancel(timer)
+    canvas.itemconfig(timer_text, text="00.00")
+    label_timer.config(text="Timer")
+    label_mark.config(text="")
+
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
@@ -39,13 +47,10 @@ def start_timer():
         count_down(work_sec)
 
 
-def restart_timer():
-    count_down(0)
-
-
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def count_down(count):
     global reps
+    global timer
     count_min = math.floor(count / 60)
     count_sec = count % 60
 
@@ -54,11 +59,11 @@ def count_down(count):
 
     if count > 0:
         canvas.itemconfig(timer_text, text=f"{count_min}:{count_sec}")
-        window.after(1000, count_down, count - 1)
+        timer = window.after(1000, count_down, count - 1)
     else:
         start_timer()
         if reps % 2 != 0:
-            label_mark.config(text="✔" * ((reps-1)//2))
+            label_mark.config(text="✔" * ((reps - 1) // 2))
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -79,7 +84,8 @@ button_start = Button(text="Start", bg="white", font=(FONT_NAME, 13, "bold"), hi
                       command=start_timer)
 button_start.grid(row=3, column=1)
 
-button_reset = Button(text="Reset", bg="white", font=(FONT_NAME, 13, "bold"), highlightthickness=0)
+button_reset = Button(text="Reset", bg="white", font=(FONT_NAME, 13, "bold"), highlightthickness=0,
+                      command=restart_timer)
 button_reset.grid(row=3, column=3)
 
 label_mark = Label(font=(FONT_NAME, 20, "bold"), bg=YELLOW, fg=GREEN)
