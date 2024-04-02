@@ -7,9 +7,9 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 0.2
-SHORT_BREAK_MIN = 0.1
-LONG_BREAK_MIN = 0.3
+WORK_MIN = 25
+SHORT_BREAK_MIN = 5
+LONG_BREAK_MIN = 20
 reps = 0
 timer = None
 
@@ -21,6 +21,8 @@ def restart_timer():
     canvas.itemconfig(timer_text, text="00.00")
     label_timer.config(text="Timer")
     label_mark.config(text="")
+    global reps
+    reps = 0
 
 
 # ---------------------------- TIMER MECHANISM ------------------------------- #
