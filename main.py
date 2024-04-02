@@ -7,9 +7,9 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 0.5
-SHORT_BREAK_MIN = 0.3
-LONG_BREAK_MIN = 0.8
+WORK_MIN = 0.2
+SHORT_BREAK_MIN = 0.1
+LONG_BREAK_MIN = 0.3
 reps = 0
 
 
@@ -29,10 +29,10 @@ def start_timer():
     long_break_sec = LONG_BREAK_MIN * 60
 
     if reps % 2 == 0:
-        label_timer.config(text="Short Break", fg=PINK)
+        label_timer.config(text="Break", fg=PINK)
         count_down(short_break_sec)
     elif reps % 8 == 0:
-        label_timer.config(text="Long Break", fg=RED)
+        label_timer.config(text="Break", fg=RED)
         count_down(long_break_sec)
     else:
         label_timer.config(text="Work", fg=GREEN)
@@ -57,6 +57,8 @@ def count_down(count):
         window.after(1000, count_down, count - 1)
     else:
         start_timer()
+        if reps % 2 != 0:
+            label_mark.config(text="✔" * ((reps-1)//2))
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -80,7 +82,7 @@ button_start.grid(row=3, column=1)
 button_reset = Button(text="Reset", bg="white", font=(FONT_NAME, 13, "bold"), highlightthickness=0)
 button_reset.grid(row=3, column=3)
 
-label_mark = Label(text="✔", font=(FONT_NAME, 20, "bold"), bg=YELLOW, fg=GREEN)
+label_mark = Label(font=(FONT_NAME, 20, "bold"), bg=YELLOW, fg=GREEN)
 label_mark.grid(row=4, column=2)
 
 window.mainloop()
