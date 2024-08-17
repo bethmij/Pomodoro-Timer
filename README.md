@@ -11,7 +11,7 @@ The Pomodoro Technique is a time management method developed by Francesco Cirill
 Technology Stack:
 ✅ Python | Tkinter
 
-<img src="./1.png" alt="login" width="300"/>
-<img src="./2.png" alt="login" width="300"/>
-<img src="./3.png" alt="login" width="300"/>
+<img src="./1.png" alt="login" width="500"/>
+<img src="./2.png" alt="login" width="500"/>
+<img src="./3.png" alt="login" width="500"/>
 
